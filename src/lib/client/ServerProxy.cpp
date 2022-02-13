@@ -620,6 +620,17 @@ ServerProxy::keyDown()
         mask2 != static_cast<KeyModifierMask>(mask))
         LOG((CLOG_DEBUG1 "key down translated to id=0x%08x, mask=0x%04x", id2, mask2));
 
+    if (static_cast<KeyID>(id) == kKeyAltGr) {
+        m_client->keyDown(kKeyControl_L, mask2, 0x0025);
+        mask2 |= KeyModifierControl;
+        m_client->keyDown(kKeyAlt_L, mask2, 0x0040);
+        mask2 |= KeyModifierAlt;
+        id2 = kKeyMeta_L;
+    }
+    if (mask2&KeyModifierAltGr) {
+        mask2 |= KeyModifierControl | KeyModifierAlt | KeyModifierMeta;
+    }
+
     // forward
     m_client->keyDown(id2, mask2, button);
 }
@@ -644,6 +655,17 @@ ServerProxy::keyRepeat()
         mask2 != static_cast<KeyModifierMask>(mask))
         LOG((CLOG_DEBUG1 "key repeat translated to id=0x%08x, mask=0x%04x", id2, mask2));
 
+    if (static_cast<KeyID>(id) == kKeyAltGr) {
+        m_client->keyRepeat(kKeyControl_L, mask2, count, 0x0025);
+        mask2 |= KeyModifierControl;
+        m_client->keyRepeat(kKeyAlt_L, mask2, count, 0x0040);
+        mask2 |= KeyModifierAlt;
+        id2 = kKeyMeta_L;
+    }
+    if (mask2&KeyModifierAltGr) {
+        mask2 |= KeyModifierControl | KeyModifierAlt | KeyModifierMeta;
+    }
+
     // forward
     m_client->keyRepeat(id2, mask2, count, button);
 }
@@ -666,6 +688,17 @@ ServerProxy::keyUp()
     if (id2   != static_cast<KeyID>(id) ||
         mask2 != static_cast<KeyModifierMask>(mask))
         LOG((CLOG_DEBUG1 "key up translated to id=0x%08x, mask=0x%04x", id2, mask2));
+
+    if (static_cast<KeyID>(id) == kKeyAltGr) {
+        m_client->keyUp(kKeyControl_L, mask2, 0x0025);
+        mask2 |= KeyModifierControl;
+        m_client->keyUp(kKeyAlt_L, mask2, 0x0040);
+        mask2 |= KeyModifierAlt;
+        id2 = kKeyMeta_L;
+    }
+    if (mask2&KeyModifierAltGr) {
+        mask2 |= KeyModifierControl | KeyModifierAlt | KeyModifierMeta;
+    }
 
     // forward
     m_client->keyUp(id2, mask2, button);
