@@ -625,10 +625,12 @@ ServerProxy::keyDown()
         mask2 |= KeyModifierControl;
         m_client->keyDown(kKeyAlt_L, mask2, 0x0040);
         mask2 |= KeyModifierAlt;
+        m_client->keyDown(kKeyShift_L, mask2, 0x0032);
+        mask2 |= KeyModifierShift;
         id2 = kKeyMeta_L;
     }
     if (mask2&KeyModifierAltGr) {
-        mask2 |= KeyModifierControl | KeyModifierAlt | KeyModifierMeta;
+        mask2 |= KeyModifierControl | KeyModifierAlt | KeyModifierMeta | KeyModifierShift;
     }
 
     // forward
@@ -660,10 +662,12 @@ ServerProxy::keyRepeat()
         mask2 |= KeyModifierControl;
         m_client->keyRepeat(kKeyAlt_L, mask2, count, 0x0040);
         mask2 |= KeyModifierAlt;
+        m_client->keyRepeat(kKeyShift_L, mask2, count, 0x0032);
+        mask2 |= KeyModifierShift;
         id2 = kKeyMeta_L;
     }
     if (mask2&KeyModifierAltGr) {
-        mask2 |= KeyModifierControl | KeyModifierAlt | KeyModifierMeta;
+        mask2 |= KeyModifierControl | KeyModifierAlt | KeyModifierMeta | KeyModifierShift;
     }
 
     // forward
@@ -694,10 +698,12 @@ ServerProxy::keyUp()
         mask2 |= KeyModifierControl;
         m_client->keyUp(kKeyAlt_L, mask2, 0x0040);
         mask2 |= KeyModifierAlt;
+        m_client->keyUp(kKeyShift_L, mask2, 0x0032);
+        mask2 |= KeyModifierShift;
         id2 = kKeyMeta_L;
     }
     if (mask2&KeyModifierAltGr) {
-        mask2 |= KeyModifierControl | KeyModifierAlt | KeyModifierMeta;
+        mask2 |= KeyModifierControl | KeyModifierAlt | KeyModifierMeta | KeyModifierShift;
     }
 
     // forward
